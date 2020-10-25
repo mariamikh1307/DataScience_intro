@@ -15,13 +15,17 @@ def game_core_v2(number):
     '''Сначала устанавливаем любое random число, а потом уменьшаем или увеличиваем его в зависимости от того, больше оно или меньше нужного.
        Функция принимает загаданное число и возвращает число попыток'''
     count = 1
-    predict = np.random.randint(1,101)
+    low = 1 #нижний порог диапазона отгадывания числа
+    high = 100 #верхний порог диапазона отгадывания числа
+    predict = 50
     while number != predict:
         count+=1
-        if number > predict: 
-            predict += 1
+        if number > predict:  
+            low = predict + 1 
+            predict = (low+high) // 2
         elif number < predict: 
-            predict -= 1
+            high = predict 
+            predict = (low+high) // 2
     return(count) # выход из цикла, если угадали
 # Проверяем
 score_game(game_core_v2)
